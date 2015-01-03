@@ -16,7 +16,7 @@ CGFloat const kTWMessageBarStyleSheetMessageBarAlpha = 0.96f;
 // Numerics (TWMessageView)
 CGFloat const kTWMessageViewBarPadding = 10.0f;
 CGFloat const kTWMessageViewIconSize = 36.0f;
-CGFloat const kTWMessageViewTextOffset = 2.0f;
+CGFloat const kTWMessageViewTextOffset = -10.0f;
 NSUInteger const kTWMessageViewiOS7Identifier = 7;
 
 // Numerics (TWMessageBarManager)
