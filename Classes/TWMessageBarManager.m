@@ -9,6 +9,7 @@
 
 // Quartz
 #import <QuartzCore/QuartzCore.h>
+#import "UIImage+Color.h"
 
 // Numerics (TWMessageBarStyleSheet)
 CGFloat const kTWMessageBarStyleSheetMessageBarAlpha = 0.96f;
@@ -455,7 +456,7 @@ static UIColor *kTWDefaultMessageBarStyleSheetInfoStrokeColor = nil;
 	if (self == [TWMessageView class])
 	{
         // Fonts
-        kTWMessageViewTitleFont = [UIFont boldSystemFontOfSize:16.0];
+        kTWMessageViewTitleFont = [UIFont fontWithName:@"Helvetica-Light" size:16.0f];
         kTWMessageViewDescriptionFont = [UIFont systemFontOfSize:14.0];
         
         // Colors
@@ -780,13 +781,13 @@ static UIColor *kTWDefaultMessageBarStyleSheetInfoStrokeColor = nil;
     switch (type)
     {
         case TWMessageBarMessageTypeError:
-            backgroundColor = kTWDefaultMessageBarStyleSheetErrorBackgroundColor;
+            backgroundColor = [[UIColor colorFromHexString:@"#ff9900"] colorWithAlphaComponent:0.96];
             break;
         case TWMessageBarMessageTypeSuccess:
-            backgroundColor = kTWDefaultMessageBarStyleSheetSuccessBackgroundColor;
+            backgroundColor = [[UIColor colorFromHexString:NAV_BG_BLUR_COLOR] colorWithAlphaComponent:0.96];
             break;
         case TWMessageBarMessageTypeInfo:
-            backgroundColor = kTWDefaultMessageBarStyleSheetInfoBackgroundColor;
+            backgroundColor = [[UIColor colorFromHexString:NAV_BG_BLUR_COLOR] colorWithAlphaComponent:0.96];
             break;
         default:
             break;
@@ -820,13 +821,13 @@ static UIColor *kTWDefaultMessageBarStyleSheetInfoStrokeColor = nil;
     switch (type)
     {
         case TWMessageBarMessageTypeError:
-            iconImage = [UIImage imageNamed:kTWMessageBarStyleSheetImageIconError];
+            iconImage = [[UIImage imageNamed:@"icon_status_failed"] imageWithTintColor: [UIColor whiteColor]];
             break;
         case TWMessageBarMessageTypeSuccess:
-            iconImage = [UIImage imageNamed:kTWMessageBarStyleSheetImageIconSuccess];
+            iconImage = [[UIImage imageNamed:@"icon_status_succeed"] imageWithTintColor: [UIColor whiteColor]];
             break;
         case TWMessageBarMessageTypeInfo:
-            iconImage = [UIImage imageNamed:kTWMessageBarStyleSheetImageIconInfo];
+            iconImage = [[UIImage imageNamed:@"icon_status_sending"] imageWithTintColor: [UIColor whiteColor]];
             break;
         default:
             break;
