@@ -15,7 +15,7 @@ CGFloat const kTWMessageBarStyleSheetMessageBarAlpha = 0.96f;
 
 // Numerics (TWMessageView)
 CGFloat const kTWMessageViewBarPadding = 10.0f;
-CGFloat const kTWMessageViewIconSize = 36.0f;
+CGFloat const kTWMessageViewIconSize = 25.0f;
 CGFloat const kTWMessageViewTextOffset = -10.0f;
 NSUInteger const kTWMessageViewiOS7Identifier = 7;
 
@@ -596,7 +596,8 @@ static UIColor *kTWDefaultMessageBarStyleSheetInfoStrokeColor = nil;
 {
     CGSize titleLabelSize = [self titleSize];
     CGSize descriptionLabelSize = [self descriptionSize];
-    return MAX((kTWMessageViewBarPadding * 2) + titleLabelSize.height + descriptionLabelSize.height + [self statusBarOffset], (kTWMessageViewBarPadding * 2) + kTWMessageViewIconSize + [self statusBarOffset]);
+    CGFloat height = MAX((kTWMessageViewBarPadding * 2) + titleLabelSize.height + descriptionLabelSize.height + [self statusBarOffset], (kTWMessageViewBarPadding * 2) + kTWMessageViewIconSize + [self statusBarOffset]);
+    return height;
 }
 
 - (CGFloat)width
