@@ -666,7 +666,8 @@ static UIColor *kTWDefaultMessageBarStyleSheetInfoStrokeColor = nil;
 {
     CGRect windowFrame = [self orientFrame:[UIApplication sharedApplication].keyWindow.frame];
     CGRect statusFrame = [self orientFrame:[UIApplication sharedApplication].statusBarFrame];
-    return CGRectMake(windowFrame.origin.x, windowFrame.origin.y, windowFrame.size.width, statusFrame.size.height);
+    CGRect frame = CGRectMake(windowFrame.origin.x, windowFrame.origin.y, windowFrame.size.width, statusFrame.size.height);
+    return frame;
 }
 
 - (UIFont *)titleFont
@@ -725,7 +726,10 @@ static UIColor *kTWDefaultMessageBarStyleSheetInfoStrokeColor = nil;
 
 - (CGRect)orientFrame:(CGRect)frame
 {
-    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation) || UIDeviceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation))
+    NSString *systemVersion = [UIDevice currentDevice].systemVersion;
+    NSUInteger systemInt = [systemVersion intValue];
+    
+    if ( (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation) || UIDeviceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) && systemInt < 8 )
     {
         frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.height, frame.size.width);
     }
@@ -901,5 +905,39 @@ static UIColor *kTWDefaultMessageBarStyleSheetInfoStrokeColor = nil;
 {
     return self.statusBarHidden;
 }
+
+- (BOOL)shouldAutorotate
+{
+    if (IS_IPAD) {
+        return YES;
+    }
+    return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    if (IS_IPAD) {
+        return UIInterfaceOrientationMaskAll;
+    }
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    if (IS_IPAD) {
+        return UIInterfaceOrientationMaskAll;
+    }
+    return UIInterfaceOrientationPortrait;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    if (IS_IPAD) {
+        return YES;
+    }
+    return UIInterfaceOrientationIsPortrait(interfaceOrientation);
+}
+
+
 
 @end
