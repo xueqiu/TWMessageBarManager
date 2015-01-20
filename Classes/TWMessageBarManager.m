@@ -12,12 +12,14 @@
 #import "UIImage+Color.h"
 
 // Numerics (TWMessageBarStyleSheet)
-CGFloat const kTWMessageBarStyleSheetMessageBarAlpha = 0.96f;
+CGFloat const kTWMessageBarStyleSheetMessageBarAlpha = 0.94f;
 
 // Numerics (TWMessageView)
-CGFloat const kTWMessageViewBarPadding = 10.0f;
-CGFloat const kTWMessageViewIconSize = 25.0f;
-CGFloat const kTWMessageViewTextOffset = -10.0f;
+CGFloat const kTWMessageViewBarPadding = 8.0f;
+CGFloat const kTWMessageViewIconXOffset = 13.0f;
+
+CGFloat const kTWMessageViewIconSize = 20.0f;
+CGFloat const kTWMessageViewTextOffset = -1.0f;
 NSUInteger const kTWMessageViewiOS7Identifier = 7;
 
 // Numerics (TWMessageBarManager)
@@ -121,6 +123,7 @@ static UIColor *kTWDefaultMessageBarStyleSheetInfoStrokeColor = nil;
 @property (nonatomic, assign, getter = isMessageVisible) BOOL messageVisible;
 @property (nonatomic, strong) TWMessageWindow *messageWindow;
 @property (nonatomic, readwrite) NSArray *accessibleElements; // accessibility
+@property (nonatomic, assign) CGFloat navigationBarHeight;
 
 // Static
 + (CGFloat)durationForMessageType:(TWMessageBarMessageType)messageType;
@@ -177,6 +180,7 @@ static UIColor *kTWDefaultMessageBarStyleSheetInfoStrokeColor = nil;
         _messageBarQueue = [[NSMutableArray alloc] init];
         _messageVisible = NO;
         _styleSheet = [TWDefaultMessageBarStyleSheet styleSheet];
+        _navigationBarHeight = [SnowballAppDelegate getAppDelegate].navigationBarHeight;
     }
     return self;
 }
@@ -379,7 +383,11 @@ static UIColor *kTWDefaultMessageBarStyleSheetInfoStrokeColor = nil;
 
 - (UIView *)messageWindowView
 {
-    return [self messageBarViewController].view;
+    UIView *view = [self messageBarViewController].view;
+    CGRect frame = self.messageWindow.frame;
+    [view setFrame:CGRectMake(frame.origin.x, frame.origin.y+self.navigationBarHeight+[UIApplication sharedApplication].statusBarFrame.size.height, frame.size.width, frame.size.height)];
+    view.clipsToBounds = YES;
+    return view;
 }
 
 - (TWMessageBarViewController *)messageBarViewController
@@ -529,9 +537,8 @@ static UIColor *kTWDefaultMessageBarStyleSheetInfoStrokeColor = nil;
         }
         CGContextRestoreGState(context);
         
-        CGFloat xOffset = kTWMessageViewBarPadding;
-        CGFloat yOffset = kTWMessageViewBarPadding + [self statusBarOffset];
-        
+        CGFloat xOffset = kTWMessageViewIconXOffset;
+        CGFloat yOffset = kTWMessageViewBarPadding ;
         // icon
         CGContextSaveGState(context);
         {
@@ -595,10 +602,13 @@ static UIColor *kTWDefaultMessageBarStyleSheetInfoStrokeColor = nil;
 
 - (CGFloat)height
 {
+    /**
     CGSize titleLabelSize = [self titleSize];
     CGSize descriptionLabelSize = [self descriptionSize];
     CGFloat height = MAX((kTWMessageViewBarPadding * 2) + titleLabelSize.height + descriptionLabelSize.height + [self statusBarOffset], (kTWMessageViewBarPadding * 2) + kTWMessageViewIconSize + [self statusBarOffset]);
     return height;
+     **/
+    return 36;
 }
 
 - (CGFloat)width
@@ -781,13 +791,13 @@ static UIColor *kTWDefaultMessageBarStyleSheetInfoStrokeColor = nil;
     switch (type)
     {
         case TWMessageBarMessageTypeError:
-            backgroundColor = [[UIColor colorFromHexString:@"#ff9900"] colorWithAlphaComponent:0.96];
+            backgroundColor = [[UIColor colorFromHexString:@"#ff9900"] colorWithAlphaComponent:kTWMessageBarStyleSheetMessageBarAlpha];
             break;
         case TWMessageBarMessageTypeSuccess:
-            backgroundColor = [[UIColor colorFromHexString:NAV_BG_BLUR_COLOR] colorWithAlphaComponent:0.96];
+            backgroundColor = [[UIColor colorFromHexString:NAV_BG_BLUR_COLOR] colorWithAlphaComponent:kTWMessageBarStyleSheetMessageBarAlpha];
             break;
         case TWMessageBarMessageTypeInfo:
-            backgroundColor = [[UIColor colorFromHexString:NAV_BG_BLUR_COLOR] colorWithAlphaComponent:0.96];
+            backgroundColor = [[UIColor colorFromHexString:NAV_BG_BLUR_COLOR] colorWithAlphaComponent:kTWMessageBarStyleSheetMessageBarAlpha];
             break;
         default:
             break;
