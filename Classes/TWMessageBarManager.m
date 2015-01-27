@@ -859,7 +859,7 @@ static UIColor *kTWDefaultMessageBarStyleSheetInfoStrokeColor = nil;
      * Pass touches through if they land on the rootViewController's view.
      * Allows notification interaction without blocking the window below.
      */
-    if ([hitView isEqual: self.rootViewController.view])
+    if ([hitView isEqual: self.rootViewController.view] || [hitView isEqual: self])
     {
         hitView = nil;
     }
