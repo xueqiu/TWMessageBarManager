@@ -772,9 +772,9 @@ static UIColor *kTWDefaultMessageBarStyleSheetInfoStrokeColor = nil;
         kTWDefaultMessageBarStyleSheetInfoBackgroundColor = [UIColor colorWithRed:0.0 green:0.482 blue:1.0 alpha:kTWMessageBarStyleSheetMessageBarAlpha]; // blue
         
         // Colors (stroke)
-        kTWDefaultMessageBarStyleSheetErrorStrokeColor = [UIColor colorWithRed:0.949f green:0.580f blue:0.0f alpha:1.0f]; // orange
-        kTWDefaultMessageBarStyleSheetSuccessStrokeColor = [UIColor colorWithRed:0.0f green:0.772f blue:0.164f alpha:1.0f]; // green
-        kTWDefaultMessageBarStyleSheetInfoStrokeColor = [UIColor colorWithRed:0.0f green:0.415f blue:0.803f alpha:1.0f]; // blue
+        kTWDefaultMessageBarStyleSheetErrorStrokeColor = [UIColor clearColor];
+        kTWDefaultMessageBarStyleSheetSuccessStrokeColor = [UIColor clearColor];
+        kTWDefaultMessageBarStyleSheetInfoStrokeColor = [UIColor clearColor]; 
     }
 }
 
