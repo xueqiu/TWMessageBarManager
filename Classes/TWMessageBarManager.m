@@ -794,10 +794,10 @@ static UIColor *kTWDefaultMessageBarStyleSheetInfoStrokeColor = nil;
             backgroundColor = [[UIColor colorFromHexString:@"#ff9900"] colorWithAlphaComponent:kTWMessageBarStyleSheetMessageBarAlpha];
             break;
         case TWMessageBarMessageTypeSuccess:
-            backgroundColor = [[UIColor colorFromHexString:NAV_BG_BLUR_COLOR] colorWithAlphaComponent:kTWMessageBarStyleSheetMessageBarAlpha];
+            backgroundColor = [[UIColor colorFromHexString:NAV_BG_COLOR] colorWithAlphaComponent:kTWMessageBarStyleSheetMessageBarAlpha];
             break;
         case TWMessageBarMessageTypeInfo:
-            backgroundColor = [[UIColor colorFromHexString:NAV_BG_BLUR_COLOR] colorWithAlphaComponent:kTWMessageBarStyleSheetMessageBarAlpha];
+            backgroundColor = [[UIColor colorFromHexString:NAV_BG_COLOR] colorWithAlphaComponent:kTWMessageBarStyleSheetMessageBarAlpha];
             break;
         default:
             break;
